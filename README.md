@@ -123,7 +123,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-MIT License - feel free to use this project for personal or commercial purposes.
+CC BY-NC 4.0 - This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. Use is permitted for non-commercial purposes only with attribution.
 
 ## Acknowledgments
 
