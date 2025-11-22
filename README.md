@@ -4,7 +4,7 @@
 
 **Live Demo:** [https://resumebuilder.amosabel-dev.workers.dev/](https://resumebuilder.amosabel-dev.workers.dev/)
 
-![Resume Builder](public/icon.png)
+<img src="public/icon.png" alt="Resume Builder" width="75" />
 
 ## Features
 
