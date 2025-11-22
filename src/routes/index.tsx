@@ -14,6 +14,7 @@ import { useResume, ResumeProvider } from '../hooks/useResume';
 import { Button } from '../components/ui/Button';
 import { Printer, Eye, X } from 'lucide-react';
 import { useState } from 'react';
+import packageJson from '../../package.json';
 
 export const Route = createFileRoute('/')({
   component: () => (
@@ -184,6 +185,10 @@ function Home() {
       >
         <Eye size={24} />
       </button>
+
+      <footer className="no-print" style={{ textAlign: 'center', marginTop: 'var(--spacing-lg)', color: 'var(--color-text-muted)' }}>
+        Version {packageJson.version}
+      </footer>
 
       <style>{`
         @media (min-width: 768px) {
