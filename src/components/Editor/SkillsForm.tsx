@@ -33,9 +33,9 @@ export const SkillsForm = () => {
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--spacing-sm)' }}>
         <AnimatePresence>
-          {resumeData.skills.map((skill, index) => (
+          {resumeData.skills.map((skill) => (
             <motion.div
-              key={`${skill}-${index}`}
+              key={skill.id}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
@@ -52,9 +52,9 @@ export const SkillsForm = () => {
                   color: 'var(--color-text)',
                 }}
               >
-                {skill}
+                {skill.name}
                 <button
-                  onClick={() => removeSkill(index)}
+                  onClick={() => removeSkill(skill.id)}
                   style={{
                     background: 'none',
                     border: 'none',

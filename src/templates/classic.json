@@ -1,0 +1,41 @@
+{
+  "id": "classic",
+  "name": "Classic",
+  "description": "A traditional, professional resume layout suitable for all industries.",
+  "theme": {
+    "colors": {
+      "primary": "#2c3e50",
+      "secondary": "#f8f9fa",
+      "background": "#ffffff",
+      "text": "#333333",
+      "textMuted": "#666666",
+      "border": "#e0e0e0"
+    },
+    "typography": {
+      "fontFamily": "Merriweather, serif",
+      "headingFamily": "Merriweather, serif",
+      "baseSize": "11pt",
+      "lineHeight": "1.6"
+    },
+    "spacing": {
+      "sectionGap": "1.5rem",
+      "itemGap": "1rem",
+      "pagePadding": "2.5cm"
+    }
+  },
+  "layout": {
+    "type": "single-column"
+  },
+  "structure": {
+    "main": ["personal-info", "summary", "experience", "education", "skills", "projects", "customSections"]
+  },
+  "sectionVariants": {
+    "personal-info": "centered",
+    "summary": "default",
+    "experience": "default",
+    "education": "default",
+    "skills": "list",
+    "projects": "default",
+    "customSections": "default"
+  }
+}

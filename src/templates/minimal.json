@@ -1,0 +1,41 @@
+{
+  "id": "minimal",
+  "name": "Minimal",
+  "description": "A clean, centered single-column layout with elegant typography.",
+  "theme": {
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#f8f9fa",
+      "background": "#ffffff",
+      "text": "#2d2d2d",
+      "textMuted": "#666666",
+      "border": "#e0e0e0"
+    },
+    "typography": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+      "headingFamily": "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+      "baseSize": "10pt",
+      "lineHeight": "1.6"
+    },
+    "spacing": {
+      "sectionGap": "2.5rem",
+      "itemGap": "1.5rem",
+      "pagePadding": "3rem 2.5rem"
+    }
+  },
+  "layout": {
+    "type": "single-column"
+  },
+  "structure": {
+    "main": ["personal-info", "summary", "experience", "projects", "education", "skills", "customSections"]
+  },
+  "sectionVariants": {
+    "personal-info": "centered",
+    "summary": "default",
+    "experience": "minimal",
+    "education": "minimal",
+    "skills": "bullet-list",
+    "projects": "default",
+    "customSections": "default"
+  }
+}

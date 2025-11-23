@@ -52,9 +52,14 @@ export const ExperienceForm = () => {
                     onChange={(e) => updateExperience(exp.id, 'company', e.target.value)}
                   />
                   <Input
-                    label="Role"
-                    value={exp.role}
-                    onChange={(e) => updateExperience(exp.id, 'role', e.target.value)}
+                    label="Position"
+                    value={exp.position}
+                    onChange={(e) => updateExperience(exp.id, 'position', e.target.value)}
+                  />
+                  <Input
+                    label="Location"
+                    value={exp.location}
+                    onChange={(e) => updateExperience(exp.id, 'location', e.target.value)}
                   />
                   <Input
                     label="Start Date"

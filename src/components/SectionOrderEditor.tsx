@@ -5,6 +5,7 @@ import { Button } from './ui/Button';
 import { ArrowUp, ArrowDown } from 'lucide-react';
 
 const sectionLabels: Record<SectionId, string> = {
+  'personal-info': 'Personal Information',
   summary: 'Professional Summary',
   experience: 'Experience',
   projects: 'Projects',

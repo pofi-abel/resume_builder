@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { ResumeData, initialResumeData, ResumeTemplate, SectionId } from '../types';
+import { ResumeData, initialResumeData, ResumeTemplate, SectionId, Experience, Education, Project, CustomSectionItem } from '../types';
 
 const STORAGE_KEY = 'resume-builder-data';
 const TEMPLATE_STORAGE_KEY = 'resume-builder-template';
@@ -12,20 +12,21 @@ interface ResumeContextType {
   updatePersonalInfo: (field: keyof ResumeData['personalInfo'], value: string) => void;
   updateSummary: (value: string) => void;
   addExperience: () => void;
-  updateExperience: (id: string, field: keyof ResumeData['experience'][0], value: any) => void;
+  updateExperience: (id: string, field: keyof Experience, value: any) => void;
   removeExperience: (id: string) => void;
   addEducation: () => void;
-  updateEducation: (id: string, field: keyof ResumeData['education'][0], value: string) => void;
+  updateEducation: (id: string, field: keyof Education, value: any) => void;
   removeEducation: (id: string) => void;
-  addSkill: (skill: string) => void;
-  removeSkill: (index: number) => void;
+  addSkill: (skillName: string) => void;
+  removeSkill: (id: string) => void;
   addProject: () => void;
-  updateProject: (id: string, field: keyof ResumeData['projects'][0], value: any) => void;
+  updateProject: (id: string, field: keyof Project, value: any) => void;
   removeProject: (id: string) => void;
   addCustomSection: (title: string) => void;
+  updateCustomSection: (id: string, title: string) => void;
   removeCustomSection: (id: string) => void;
   addCustomSectionItem: (sectionId: string) => void;
-  updateCustomSectionItem: (sectionId: string, itemId: string, field: keyof ResumeData['customSections'][0]['items'][0], value: string) => void;
+  updateCustomSectionItem: (sectionId: string, itemId: string, field: keyof CustomSectionItem, value: string) => void;
   removeCustomSectionItem: (sectionId: string, itemId: string) => void;
   reorderSections: (newOrder: SectionId[]) => void;
 }
@@ -38,7 +39,12 @@ export function ResumeProvider({ children }: { children: React.ReactNode }) {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         try {
-          return JSON.parse(saved);
+          const parsed = JSON.parse(saved);
+          // Migrate old data: ensure personal-info is in sectionOrder
+          if (parsed.sectionOrder && !parsed.sectionOrder.includes('personal-info')) {
+            parsed.sectionOrder = ['personal-info', ...parsed.sectionOrder];
+          }
+          return parsed;
         } catch (e) {
           console.error('Failed to parse resume data', e);
         }
@@ -88,7 +94,8 @@ export function ResumeProvider({ children }: { children: React.ReactNode }) {
         {
           id: crypto.randomUUID(),
           company: '',
-          role: '',
+          position: '',
+          location: '',
           startDate: '',
           endDate: '',
           current: false,
@@ -98,7 +105,7 @@ export function ResumeProvider({ children }: { children: React.ReactNode }) {
     }));
   };
 
-  const updateExperience = (id: string, field: keyof ResumeData['experience'][0], value: any) => {
+  const updateExperience = (id: string, field: keyof Experience, value: any) => {
     setResumeData((prev) => ({
       ...prev,
       experience: prev.experience.map((exp) => (exp.id === id ? { ...exp, [field]: value } : exp)),
@@ -124,12 +131,13 @@ export function ResumeProvider({ children }: { children: React.ReactNode }) {
           field: '',
           startDate: '',
           endDate: '',
+          description: '',
         },
       ],
     }));
   };
 
-  const updateEducation = (id: string, field: keyof ResumeData['education'][0], value: string) => {
+  const updateEducation = (id: string, field: keyof Education, value: any) => {
     setResumeData((prev) => ({
       ...prev,
       education: prev.education.map((edu) => (edu.id === id ? { ...edu, [field]: value } : edu)),
@@ -143,18 +151,18 @@ export function ResumeProvider({ children }: { children: React.ReactNode }) {
     }));
   };
 
-  const addSkill = (skill: string) => {
-    if (!skill.trim()) return;
+  const addSkill = (skillName: string) => {
+    if (!skillName.trim()) return;
     setResumeData((prev) => ({
       ...prev,
-      skills: [...prev.skills, skill],
+      skills: [...prev.skills, { id: crypto.randomUUID(), name: skillName }],
     }));
   };
 
-  const removeSkill = (index: number) => {
+  const removeSkill = (id: string) => {
     setResumeData((prev) => ({
       ...prev,
-      skills: prev.skills.filter((_, i) => i !== index),
+      skills: prev.skills.filter((skill) => skill.id !== id),
     }));
   };
 
@@ -167,14 +175,15 @@ export function ResumeProvider({ children }: { children: React.ReactNode }) {
           id: crypto.randomUUID(),
           name: '',
           description: '',
-          link: '',
+          githubUrl: '',
+          liveUrl: '',
           technologies: [],
         },
       ],
     }));
   };
 
-  const updateProject = (id: string, field: keyof ResumeData['projects'][0], value: any) => {
+  const updateProject = (id: string, field: keyof Project, value: any) => {
     setResumeData((prev) => ({
       ...prev,
       projects: prev.projects.map((proj) => (proj.id === id ? { ...proj, [field]: value } : proj)),
@@ -202,6 +211,15 @@ export function ResumeProvider({ children }: { children: React.ReactNode }) {
     }));
   };
 
+  const updateCustomSection = (id: string, title: string) => {
+    setResumeData((prev) => ({
+      ...prev,
+      customSections: prev.customSections.map((sec) =>
+        sec.id === id ? { ...sec, title } : sec
+      ),
+    }));
+  };
+
   const removeCustomSection = (id: string) => {
     setResumeData((prev) => ({
       ...prev,
@@ -222,7 +240,8 @@ export function ResumeProvider({ children }: { children: React.ReactNode }) {
                   id: crypto.randomUUID(),
                   title: '',
                   subtitle: '',
-                  date: '',
+                  startDate: '',
+                  endDate: '',
                   description: '',
                 },
               ],
@@ -293,6 +312,7 @@ export function ResumeProvider({ children }: { children: React.ReactNode }) {
     updateProject,
     removeProject,
     addCustomSection,
+    updateCustomSection,
     removeCustomSection,
     addCustomSectionItem,
     updateCustomSectionItem,
