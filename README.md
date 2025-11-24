@@ -2,8 +2,6 @@
 
 > Build your professional resume in minutes with an interactive, mobile-first resume builder.
 
-**Live Demo:** [https://resumebuilder.amosabel-dev.workers.dev/](https://resumebuilder.amosabel-dev.workers.dev/)
-
 <img src="public/icon.png" alt="Resume Builder" width="75" />
 
 ## Features
