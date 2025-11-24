@@ -6,7 +6,7 @@ import { SkillsForm } from '../components/Editor/SkillsForm';
 import { ProjectsForm } from '../components/Editor/ProjectsForm';
 import { CustomSectionForm } from '../components/Editor/CustomSectionForm';
 import { Preview } from '../components/Preview/Preview';
-import { TemplateDialog } from '../components/TemplateDialog';
+import { TemplateSelector } from '../components/TemplateSelector';
 import { SectionOrderEditor } from '../components/SectionOrderEditor';
 import { ExportButton } from '../components/ExportButton';
 import { ImportButton } from '../components/ImportButton';
@@ -14,7 +14,7 @@ import { Card } from '../components/ui/Card';
 import { TextArea } from '../components/ui/Input';
 import { useResume, ResumeProvider } from '../hooks/useResume';
 import { Button } from '../components/ui/Button';
-import { Printer, Eye, X, Palette } from 'lucide-react';
+import { Printer, Eye, X } from 'lucide-react';
 import { useState } from 'react';
 import packageJson from '../../package.json';
 
@@ -29,7 +29,6 @@ export const Route = createFileRoute('/')({
 function Home() {
   const { resumeData, updateSummary } = useResume();
   const [showMobilePreview, setShowMobilePreview] = useState(false);
-  const [showTemplateDialog, setShowTemplateDialog] = useState(false);
 
   const handlePrint = () => {
     window.print();
@@ -49,9 +48,6 @@ function Home() {
             <p style={{ color: 'var(--color-text-muted)', fontSize: 'clamp(0.875rem, 2vw, 1rem)' }}>Build your professional resume in minutes.</p>
         </div>
         <div style={{ display: 'flex', gap: 'var(--spacing-sm)', flexWrap: 'wrap' }}>
-          <Button onClick={() => setShowTemplateDialog(true)} icon={<Palette size={16} />} variant="secondary">
-            Templates
-          </Button>
           <Button onClick={handlePrint} icon={<Printer size={16} />}>
               Export PDF
           </Button>
@@ -59,8 +55,6 @@ function Home() {
           <ImportButton />
         </div>
       </header>
-
-      <TemplateDialog isOpen={showTemplateDialog} onClose={() => setShowTemplateDialog(false)} />
 
       <div style={{ 
         display: 'flex', 
@@ -75,6 +69,7 @@ function Home() {
           gap: 'var(--spacing-lg)',
           width: '100%'
         }}>
+          <TemplateSelector />
           <SectionOrderEditor />
           <PersonalInfoForm />
           
