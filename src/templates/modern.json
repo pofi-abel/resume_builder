@@ -1,0 +1,54 @@
+{
+  "id": "modern",
+  "name": "Modern",
+  "description": "A contemporary two-column layout with a vibrant sidebar.",
+  "theme": {
+    "colors": {
+      "primary": "#2563eb",
+      "secondary": "#2563eb",
+      "background": "#ffffff",
+      "text": "#1a1a1a",
+      "textMuted": "#666666",
+      "border": "#e0e0e0",
+      "sidebarText": "#ffffff"
+    },
+    "typography": {
+      "fontFamily": "Inter, sans-serif",
+      "headingFamily": "Inter, sans-serif",
+      "baseSize": "10pt",
+      "lineHeight": "1.5"
+    },
+    "spacing": {
+      "sectionGap": "2rem",
+      "itemGap": "1rem",
+      "pagePadding": "2rem"
+    }
+  },
+  "layout": {
+    "type": "two-column",
+    "columns": "35% 1fr",
+    "sidebarPosition": "left"
+  },
+  "structure": {
+    "sidebar": [
+      "personal-info",
+      "skills",
+      "education"
+    ],
+    "main": [
+      "summary",
+      "experience",
+      "projects",
+      "customSections"
+    ]
+  },
+  "sectionVariants": {
+    "personal-info": "default",
+    "summary": "default",
+    "experience": "default",
+    "education": "default",
+    "skills": "sidebar",
+    "projects": "default",
+    "customSections": "default"
+  }
+}

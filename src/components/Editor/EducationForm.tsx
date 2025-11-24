@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input } from '../ui/Input';
+import { Input, TextArea } from '../ui/Input';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { useResume } from '../../hooks/useResume';
@@ -75,6 +75,12 @@ export const EducationForm = () => {
                         placeholder="YYYY"
                     />
                   </div>
+                  <TextArea
+                    label="Description"
+                    value={edu.description}
+                    onChange={(e) => updateEducation(edu.id, 'description', e.target.value)}
+                    placeholder="• Relevant coursework, honors, etc."
+                  />
                 </div>
               </div>
             </motion.div>

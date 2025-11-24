@@ -52,9 +52,15 @@ export const ProjectsForm = () => {
                     onChange={(e) => updateProject(project.id, 'name', e.target.value)}
                   />
                   <Input
-                    label="Link"
-                    value={project.link}
-                    onChange={(e) => updateProject(project.id, 'link', e.target.value)}
+                    label="GitHub URL"
+                    value={project.githubUrl}
+                    onChange={(e) => updateProject(project.id, 'githubUrl', e.target.value)}
+                    placeholder="https://github.com/..."
+                  />
+                  <Input
+                    label="Live URL"
+                    value={project.liveUrl}
+                    onChange={(e) => updateProject(project.id, 'liveUrl', e.target.value)}
                     placeholder="https://..."
                   />
                 </div>

@@ -6,13 +6,15 @@ import { SkillsForm } from '../components/Editor/SkillsForm';
 import { ProjectsForm } from '../components/Editor/ProjectsForm';
 import { CustomSectionForm } from '../components/Editor/CustomSectionForm';
 import { Preview } from '../components/Preview/Preview';
-import { TemplateSelector } from '../components/TemplateSelector';
+import { TemplateDialog } from '../components/TemplateDialog';
 import { SectionOrderEditor } from '../components/SectionOrderEditor';
+import { ExportButton } from '../components/ExportButton';
+import { ImportButton } from '../components/ImportButton';
 import { Card } from '../components/ui/Card';
 import { TextArea } from '../components/ui/Input';
 import { useResume, ResumeProvider } from '../hooks/useResume';
 import { Button } from '../components/ui/Button';
-import { Printer, Eye, X } from 'lucide-react';
+import { Printer, Eye, X, Palette } from 'lucide-react';
 import { useState } from 'react';
 import packageJson from '../../package.json';
 
@@ -27,6 +29,7 @@ export const Route = createFileRoute('/')({
 function Home() {
   const { resumeData, updateSummary } = useResume();
   const [showMobilePreview, setShowMobilePreview] = useState(false);
+  const [showTemplateDialog, setShowTemplateDialog] = useState(false);
 
   const handlePrint = () => {
     window.print();
@@ -42,13 +45,22 @@ function Home() {
         alignItems: 'flex-start'
       }}>
         <div>
-            <h1 style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', fontWeight: 'bold', color: 'var(--color-text)' }}>Resume Builder</h1>
+            <h1 style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', fontWeight: 'bold', color: 'var(--color-text)' }}>Resume Builder <span style={{ fontSize: 'clamp(.6rem, 5vw, .6rem)' }}>{packageJson.version}</span></h1>
             <p style={{ color: 'var(--color-text-muted)', fontSize: 'clamp(0.875rem, 2vw, 1rem)' }}>Build your professional resume in minutes.</p>
         </div>
-        <Button onClick={handlePrint} icon={<Printer size={16} />}>
-            Export PDF
-        </Button>
+        <div style={{ display: 'flex', gap: 'var(--spacing-sm)', flexWrap: 'wrap' }}>
+          <Button onClick={() => setShowTemplateDialog(true)} icon={<Palette size={16} />} variant="secondary">
+            Templates
+          </Button>
+          <Button onClick={handlePrint} icon={<Printer size={16} />}>
+              Export PDF
+          </Button>
+          <ExportButton />
+          <ImportButton />
+        </div>
       </header>
+
+      <TemplateDialog isOpen={showTemplateDialog} onClose={() => setShowTemplateDialog(false)} />
 
       <div style={{ 
         display: 'flex', 
@@ -63,7 +75,6 @@ function Home() {
           gap: 'var(--spacing-lg)',
           width: '100%'
         }}>
-          <TemplateSelector />
           <SectionOrderEditor />
           <PersonalInfoForm />
           
@@ -185,10 +196,6 @@ function Home() {
       >
         <Eye size={24} />
       </button>
-
-      <footer className="no-print" style={{ textAlign: 'center', marginTop: 'var(--spacing-lg)', color: 'var(--color-text-muted)' }}>
-        Version {packageJson.version}
-      </footer>
 
       <style>{`
         @media (min-width: 768px) {

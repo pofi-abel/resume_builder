@@ -93,10 +93,16 @@ export const CustomSectionForm = () => {
                         placeholder="Organization or Issuer"
                       />
                       <Input
-                        label="Date"
-                        value={item.date}
-                        onChange={(e) => updateCustomSectionItem(section.id, item.id, 'date', e.target.value)}
-                        placeholder="Date or Duration"
+                        label="Start Date"
+                        value={item.startDate}
+                        onChange={(e) => updateCustomSectionItem(section.id, item.id, 'startDate', e.target.value)}
+                        placeholder="MM/YYYY"
+                      />
+                      <Input
+                        label="End Date"
+                        value={item.endDate}
+                        onChange={(e) => updateCustomSectionItem(section.id, item.id, 'endDate', e.target.value)}
+                        placeholder="MM/YYYY"
                       />
                     </div>
                     <TextArea

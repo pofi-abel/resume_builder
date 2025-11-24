@@ -14,7 +14,8 @@ export type PersonalInfo = {
 export type Experience = {
   id: string;
   company: string;
-  role: string;
+  position: string;
+  location: string;
   startDate: string;
   endDate: string;
   current: boolean;
@@ -28,13 +29,22 @@ export type Education = {
   field: string;
   startDate: string;
   endDate: string;
+  description: string;
+};
+
+export type Skill = {
+  id: string;
+  name: string;
+  level?: string;
+  category?: string;
 };
 
 export type Project = {
   id: string;
   name: string;
   description: string;
-  link: string;
+  githubUrl: string;
+  liveUrl: string;
   technologies: string[];
 };
 
@@ -42,7 +52,8 @@ export type CustomSectionItem = {
   id: string;
   title: string;
   subtitle: string;
-  date: string;
+  startDate: string;
+  endDate: string;
   description: string;
 };
 
@@ -52,20 +63,20 @@ export type CustomSection = {
   items: CustomSectionItem[];
 };
 
-export type SectionId = 'summary' | 'experience' | 'projects' | 'education' | 'skills' | 'customSections';
+export type SectionId = 'personal-info' | 'summary' | 'experience' | 'projects' | 'education' | 'skills' | 'customSections';
 
 export type ResumeData = {
   personalInfo: PersonalInfo;
   summary: string;
   experience: Experience[];
   education: Education[];
-  skills: string[];
+  skills: Skill[];
   projects: Project[];
   customSections: CustomSection[];
   sectionOrder: SectionId[];
 };
 
-export const defaultSectionOrder: SectionId[] = ['summary', 'experience', 'projects', 'education', 'skills', 'customSections'];
+export const defaultSectionOrder: SectionId[] = ['personal-info', 'summary', 'experience', 'projects', 'education', 'skills', 'customSections'];
 
 export const initialResumeData: ResumeData = {
   personalInfo: {
